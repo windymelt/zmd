@@ -108,6 +108,10 @@ const config = {
             title: 'More',
             items: [
               {
+                label: 'ニコ動',
+                href: 'https://www.nicovideo.jp/series/367307',
+              },
+              {
                 label: 'Blog',
                 to: '/blog',
               },
