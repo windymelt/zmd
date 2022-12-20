@@ -75,6 +75,30 @@ movie
 └── assets
 ```
 
+このディレクトリに以下の内容で `docker-compose.yml` を配置してください:
+
+```yaml
+version: "3.9"
+services:
+  zmm:
+    image: windymelt/zmm:latest
+    volumes:
+      - "./:/app"
+      # 手元にあるフォントを使えるようにする措置
+      - "$HOME/.fonts/:/root/.fonts:ro"
+    working_dir: /app
+    environment:
+      - "VOICEVOX_URI=http://voicevox-cpu:50021"
+      - "CHROMIUM_CMD=chromium-browser"
+      - "CHROMIUM_NOSANDBOX=1"
+    mem_limit: 4g
+  voicevox-cpu:
+    image: voicevox/voicevox_engine:cpu-ubuntu20.04-latest
+    ports:
+      - "50021:50021"
+    mem_limit: 4g
+```
+
 #### 原稿ファイルを用意する
 
 ZMMでは、原稿をXMLで作成します。
