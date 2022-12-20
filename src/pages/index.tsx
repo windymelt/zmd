@@ -23,7 +23,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            ZMM チュートリアル - 5min ⏱️
+            ZMM チュートリアル - 10min ⏱️
           </Link>
         </div>
       </div>

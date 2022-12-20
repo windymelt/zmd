@@ -119,6 +119,10 @@ const config = {
                 label: 'GitHub',
                 href: 'https://github.com/windymelt/zmm',
               },
+              {
+                label: '寄付してくれ!!!',
+                href: 'https://www.buymeacoffee.com/windymelt',
+              },
             ],
           },
         ],
