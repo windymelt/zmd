@@ -45,8 +45,6 @@ ZMMを動かすためには、以下のうちどちらかが必要です。
 
 ### Dockerを使ったインストール
 
-TODO: 起動時に必要なディレクトリを掘るようにする
-
 **Docker**とは、プログラムをパッケージ化してどこでも動くようにするためのありがたいツールです。
 Dockerがあれば、PCの環境を汚さずにどこでもプログラムを動かすことができます。
 
@@ -63,16 +61,12 @@ Dockerをまだ持っていない場合は、ZMMを動かす前に、Dockerを�
 
 #### フォルダを用意する
 
-(ここはあとで不要になる予定)
-
 素材を用意したりするためのフォルダを用意します。トップのフォルダの名前は何でもよいですが、ここでは
 `movie` としました。
 
-```
-movie
-├── artifacts
-│   └── html
-└── assets
+```shell
+# Linuxの例
+$ mkdir movie && cd movie
 ```
 
 このディレクトリに以下の内容で `docker-compose.yml` を配置してください:
@@ -102,17 +96,22 @@ services:
 #### 原稿ファイルを用意する
 
 ZMMでは、原稿をXMLで作成します。
-冒頭に示したXMLファイルをコピーして、 `source.xml`
-という名前で保存しましょう(名前は何でもかまいません)。
 
-以下のような状態になっているはずです。
+ZMMには自動的に必要な原稿ファイル等を生成する機能があるため、[`init`コマンド](/docs/api/command/init)を使って原稿のひな形を用意します。
+
+```shell
+$ docker compose run --rm -it zmm init
+/app を ZMMプロジェクトとして初期化しますか? [y/N]?>y
+```
+
+すると、ZMMが必要なファイルを用意します。コマンドの実行後は以下のような状態になっているはずです。
 
 ```
 movie
 ├── artifacts
 │   └── html
 ├── assets
-└── source.xml
+└── script.xml
 ```
 
 #### 素材を用意する
@@ -137,7 +136,7 @@ movie
 │   ├── bgm.mp3
 │   ├── metan.png
 │   └── zunda.png
-└── source.xml
+└── script.xml
 ```
 
 #### ZMMを起動する
@@ -151,7 +150,7 @@ docker compose up voicevox-cpu
 別のウィンドウで以下のコマンドを実行して、ZMMを起動しましょう。
 
 ```shell
-docker compose run --rm zmm source.xml
+docker compose run --rm zmm script.xml
 ```
 
 するとZMMが動画処理を開始し、 `output_with_bgm.mp4` に動画が生成されます。
