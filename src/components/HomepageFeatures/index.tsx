@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './styles.module.css';
 
 type FeatureItem = {
+  itemType: "img" | "svg",
   title: string;
   Img: React.ComponentType<React.ComponentProps<'img'>>;
   description: JSX.Element;
@@ -10,15 +11,18 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'オープンソース',
-    src: require('@site/static/img/zmm-small.png').default,
+    itemType: "svg",
+    title: 'オープンソース / MITライセンス',
+    Svg: require('@site/static/img/MIT_logo.svg').default,
     description: (
       <>
         ZMMは誰でも開発に参加できる開かれたプラットフォームです。<a href="https://github.com/windymelt/zmm" target="_blank">GitHub</a>でソースコードは公開されています。
+        <a href="https://ja.wikipedia.org/wiki/MIT_License" target="_blank">MITライセンス</a>を採用しているので、誰でもほぼ制限無く使うことができます。
       </>
     ),
   },
   {
+    itemType: "img",
     title: 'すべてをテキストで',
     src: require('@site/static/img/zmm-small.png').default,
     description: (
@@ -28,6 +32,7 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
+    itemType: "img",
     title: 'ほげほげふがふが',
     src: require('@site/static/img/zmm-small.png').default,
     description: (
@@ -38,11 +43,25 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, src, description}: FeatureItem) {
+function Feature({itemType, title, src, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
           <img src={src} className={styles.featureSvg} role="img" />
+      </div>
+      <div className="text--center padding-horiz--md">
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
+    </div>
+  );
+}
+
+function SvgFeature({itemType, title, Svg, description}: FeatureItem) {
+  return (
+    <div className={clsx('col col--4')}>
+      <div className="text--center">
+          <Svg className={styles.featureSvg} role="img" />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
@@ -57,9 +76,7 @@ export default function HomepageFeatures(): JSX.Element {
     <section className={styles.features}>
       <div className="container">
         <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
+          {FeatureList.map((props, idx) => (props.itemType == "svg") ? (<SvgFeature key={idx} {...props} />) : (<Feature key={idx} {...props} />))}
         </div>
       </div>
     </section>

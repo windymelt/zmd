@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import { useEffect } from 'react';
 
 import styles from './index.module.css';
 
@@ -31,6 +32,18 @@ function HomepageHeader() {
   );
 }
 
+function VideoShowCase(): JSX.Element {
+    useEffect(() => {
+        console.log("adding showcase");
+        const container = document.querySelector('.js-video-showcase') as HTMLElement;
+    const scriptUrl = document.createElement('script');
+    scriptUrl.type = 'application/javascript';
+    scriptUrl.src = 'https://embed.nicovideo.jp/watch/sm41490224/script?w=720&h=480';
+    container.appendChild(scriptUrl);
+    });
+    return (<div className={clsx("js-video-showcase", styles.videoShowCase)}></div>);
+}
+
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
@@ -39,6 +52,7 @@ export default function Home(): JSX.Element {
       description="VOICEVOX解説動画作成ツールZMMのページ">
       <HomepageHeader />
       <main>
+        <VideoShowCase />
         <HomepageFeatures />
       </main>
     </Layout>
