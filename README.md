@@ -1,3 +1,14 @@
+# ZMD -- ZMM Document Site (https://www.3qe.us/zmm/doc/index.html)
+
+## How to release
+
+1. Merge PR into main branch
+2. Run workflow manually
+
+Original README follows:
+
+----
+
 # Website
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
